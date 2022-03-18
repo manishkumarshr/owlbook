@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <strong>Owlbook</strong> 
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" [class.active]="activeTab === 'dashboard'">
+          <a class="nav-link" href="/">Dashboard </a>
+        </li>
+        <li class="nav-item dropdown" [class.active]="activeTab !== 'dashboard'">
+          <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Transact
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a *ngFor="let item of transactions" href="javascript:void(0)" class="dropdown-item" (click)="handleStaticNavigation(item)">{{ item.label }}</a>
+          </div>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <button class="btn btn-sm btn-outline-secondary" type="button" (click)="logoutUser()">Logout</button>
+      </form>
+    </div>
+  </nav>

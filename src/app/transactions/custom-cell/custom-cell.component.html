@@ -1,0 +1,4 @@
+<span>
+  <button *ngIf="!params.value" class="btn btn-warning btn-sm" (click)="auditClicked()">Audit</button>
+  <span class="text-success" *ngIf="params.value">Audited</span>
+</span>

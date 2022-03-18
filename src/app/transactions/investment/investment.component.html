@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="col-lg-6 col-md-8 col-sm-10 col">
+    <div class="pt-2 pb-4">
+      <span>Investments</span>
+      <button class="float-right btn btn-info btn-sm" type="button" (click)="toggleInvestmentForm()"
+        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+        Add Investment
+      </button>
+    </div>
+    <div *ngIf="showError" class="alert alert-danger" role="alert">{{errorText}}</div>
+    <div class="collapse" id="collapseExample" [ngbCollapse]="isCollapsed">
+      <div class="card card-body">
+        <form [formGroup]="investmentForm" (ngSubmit)="submitInvestment()">
+          <div class="form-group" [ngClass]="{'is-invalid': false}" >
+            <select id="investor" class="form-control" formControlName="investor" >
+              <option value="" disabled>Select Investor...</option>
+              <option *ngFor="let item of investors" [ngValue]="item.id" >{{item.name}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">INR</span>
+              </div>
+              <input id="amount" formControlName="amount" placeholder="Amount" type="number" class="form-control" aria-label="Amount (in ruppee)">
+            </div>
+          </div>
+          <div class="form-group">
+            <select id="paymentMode" formControlName="paymentMode" class="form-control" >
+              <option value="" disabled>Choose Payment Mode...</option>
+              <option *ngFor="let item of paymentModes" [ngValue]="item.id" >{{item.label}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <input id="investmentDate" type="date" formControlName="investmentDate" class="form-control" placeholder="Investment Date">
+              <div class="input-group-append">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group mb-3">
+              <input placeholder="Comment" id="comment" formControlName="comment" type="text" class="form-control" aria-label="Comment">
+            </div>
+          </div>
+          <button type="submit" [disabled]="!this.investmentForm.valid" class="btn btn-primary btn-sm mr-1">Submit</button>
+          <button type="button" class="btn btn-secondary btn-sm" (click)="cancel()">Cancel</button>
+        </form>        
+      </div>
+    </div>
+    <div class="invesmentGrid mt-2">
+      <ag-grid-angular
+        #agGrid
+        [context]="context"
+        id="myGrid"
+        class="ag-theme-alpine"
+        [animateRows]="true"
+        [columnDefs]="columnDefs"
+        [frameworkComponents]="frameworkComponents"
+        (gridReady)="onGridReady($event)"
+      ></ag-grid-angular>
+    </div>    
+  </div>  
+</div>
